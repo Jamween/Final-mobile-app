@@ -1,0 +1,7 @@
+{
+  "name": "subscription-tracker-app",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
