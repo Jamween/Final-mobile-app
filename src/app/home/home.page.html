@@ -23,9 +23,17 @@
       <ion-card-title>Upcoming Renewals</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <p>No subscriptions yet.</p>
+      <ion-list *ngIf="subscriptions.length > 0; else noSubscriptions">
+        <ion-item *ngFor="let sub of subscriptions">
+          {{ sub.name }} - €{{ sub.amount }} - {{ sub.billingCycle }}
+        </ion-item>
+      </ion-list>
+      <ng-template #noSubscriptions>
+        <p>No subscriptions yet.</p>
+      </ng-template>
     </ion-card-content>
   </ion-card>
+  
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button routerLink="/add-subscription">
