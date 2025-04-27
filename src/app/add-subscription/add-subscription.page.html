@@ -6,6 +6,28 @@
 
 <ion-content class="ion-padding">
 
+  <!-- Popular Services Section -->
+  <h2 class="ion-padding-top">Popular Services</h2>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="6" *ngFor="let service of popularServices">
+        <ion-card button (click)="selectPopularService(service)">
+          <ion-card-content class="ion-text-center">
+            <ion-img [src]="service.image" style="width: 60px; height: 60px; margin-bottom: 10px;"></ion-img>
+            <p>{{ service.name }}</p>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <!-- Divider -->
+  <ion-item lines="full">
+    <ion-label class="ion-text-center">OR</ion-label>
+  </ion-item>
+
+  <!-- Manual Add Form -->
+  <h2 class="ion-padding-top">Add Custom Subscription</h2>
   <form (ngSubmit)="saveSubscription()">
 
     <ion-item>
@@ -14,7 +36,7 @@
     </ion-item>
 
     <ion-item>
-      <ion-label position="floating">Amount (&euro;)</ion-label>
+      <ion-label position="floating">Amount (€)</ion-label>
       <ion-input type="number" [(ngModel)]="subscription.amount" name="amount" required></ion-input>
     </ion-item>
 
