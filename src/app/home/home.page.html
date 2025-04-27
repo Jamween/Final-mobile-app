@@ -24,9 +24,16 @@
     </ion-card-header>
     <ion-card-content>
       <ion-list *ngIf="subscriptions.length > 0; else noSubscriptions">
-        <ion-item *ngFor="let sub of subscriptions">
-          {{ sub.name }} - €{{ sub.amount }} - {{ sub.billingCycle }}
-        </ion-item>
+        <ion-item-sliding *ngFor="let sub of subscriptions; let i = index">
+          <ion-item>
+            {{ sub.name }} - €{{ sub.amount }} - {{ sub.billingCycle }}
+          </ion-item>
+          <ion-item-options side="end">
+            <ion-item-option color="danger" (click)="deleteSubscription(i)">
+              Delete
+            </ion-item-option>
+          </ion-item-options>
+        </ion-item-sliding>
       </ion-list>
       <ng-template #noSubscriptions>
         <p>No subscriptions yet.</p>

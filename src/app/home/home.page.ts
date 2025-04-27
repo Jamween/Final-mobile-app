@@ -23,6 +23,17 @@ export class HomePage {
     this.loadSubscriptions();
   }
 
+  async deleteSubscription(index: number) {
+    this.subscriptions.splice(index, 1); // Remove from array
+  
+    await Preferences.set({
+      key: 'subscriptions',
+      value: JSON.stringify(this.subscriptions),
+    });
+  
+    this.calculateTotals(); // Recalculate totals after deletion
+  }  
+
   async loadSubscriptions() {
     const { value } = await Preferences.get({ key: 'subscriptions' });
     this.subscriptions = value ? JSON.parse(value) : [];
