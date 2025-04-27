@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { HomePage } from './home/home.page';
 import { AddSubscriptionPage } from './add-subscription/add-subscription.page';
+import { SettingsPage } from './settings/settings.page';
 
 export const routes: Routes = [
   {
@@ -16,4 +17,8 @@ export const routes: Routes = [
     path: 'add-subscription',
     component: AddSubscriptionPage,
   },
+  {
+    path: 'settings',
+    component: SettingsPage
+  }
 ];
