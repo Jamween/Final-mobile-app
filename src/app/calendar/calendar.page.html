@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Calendar</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <!-- Calendar Picker -->
+  <ion-datetime
+    presentation="date"
+    (ionChange)="dateSelected($event)"
+    [value]="selectedDate">
+  </ion-datetime>
+
+  <!-- Upcoming Renewals List -->
+  <h2 class="ion-padding-top">Upcoming Renewals</h2>
+
+  <ion-list *ngIf="allRenewals.length > 0; else noRenewals">
+    <ion-item *ngFor="let item of allRenewals">
+      <ion-label>
+        <strong>{{ item.formattedDate }}</strong><br>
+        {{ item.name }} - €{{ item.amount }}
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ng-template #noRenewals>
+    <ion-card>
+      <ion-card-content class="ion-text-center">
+        <p>No upcoming renewals.</p>
+      </ion-card-content>
+    </ion-card>
+  </ng-template>
+
+  <ion-footer>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-button routerLink="/calendar">
+          <ion-label>Calendar</ion-label>
+        </ion-button>
+        <ion-button routerLink="/home">
+          <ion-label>Dashboard</ion-label>
+        </ion-button>
+        <ion-button routerLink="/settings">
+          <ion-label>Settings</ion-label>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-footer>
+  
+</ion-content>
+
+
