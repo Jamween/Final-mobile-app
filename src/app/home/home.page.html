@@ -7,7 +7,7 @@
 <ion-content class="ion-padding">
 
   <!-- Search Bar -->
-  <ion-searchbar placeholder="Search Your Subscriptions"></ion-searchbar>
+  <ion-searchbar placeholder="Search Your Subscriptions" (ionInput)="filterSubscriptions($event)"></ion-searchbar>
 
   <!-- Spending Card -->
   <ion-card color="warning">
@@ -15,15 +15,15 @@
       <ion-card-title>Total Spending</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <h2>€{{ totalMonthly.toFixed(2) }} / Month</h2>
-      <h2>€{{ totalYearly.toFixed(2) }} / Year</h2>
+      <h2>{{ currency }}{{ totalMonthly.toFixed(2) }} / Month</h2>
+      <h2>{{ currency }}{{ totalYearly.toFixed(2) }} / Year</h2>
       <canvas #pieCanvas></canvas> 
     </ion-card-content>
   </ion-card>
 
   <!-- Subscriptions List -->
-  <ion-list *ngIf="subscriptions.length > 0; else noSubscriptions">
-    <ion-item-sliding *ngFor="let sub of subscriptions; let i = index">
+  <ion-list *ngIf="filteredSubscriptions.length > 0; else noSubscriptions">
+    <ion-item-sliding *ngFor="let sub of filteredSubscriptions; let i = index">
       <ion-item>
         <ion-avatar slot="start">
           <ion-icon name="card-outline" size="large"></ion-icon>

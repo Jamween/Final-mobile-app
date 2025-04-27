@@ -13,25 +13,47 @@ import { Chart } from 'chart.js/auto';
   imports: [IonicModule, RouterModule, CommonModule],
 })
 export class HomePage {
-  subscriptions: any[] = [];
   totalMonthly: number = 0;
   totalYearly: number = 0;
+  subscriptions: any[] = [];          // All subscriptions
+  filteredSubscriptions: any[] = [];  // Displayed subscriptions
+  searchText: string = '';
+  currency: string = '€';  // Default to Euro
+
+
 
   @ViewChild('pieCanvas') pieCanvas!: ElementRef;
   pieChart: any;
 
   constructor() {}
 
-  ionViewWillEnter() {
-    this.loadSubscriptions();
+  async ionViewWillEnter() {
+    await this.loadSubscriptions();
+    await this.loadCurrency();
   }
+  
 
   async loadSubscriptions() {
     const { value } = await Preferences.get({ key: 'subscriptions' });
     this.subscriptions = value ? JSON.parse(value) : [];
+    this.filteredSubscriptions = [...this.subscriptions];
     this.calculateTotals();
     this.createPieChart();
   }
+
+  async loadCurrency() {
+    const { value } = await Preferences.get({ key: 'currency' });
+    this.currency = value || '€'; // Default to Euro
+  }
+  
+
+  filterSubscriptions(event: any) {
+    const searchText = event.target.value.toLowerCase();
+    this.filteredSubscriptions = this.subscriptions.filter(sub => 
+      sub.name.toLowerCase().includes(searchText)
+    );
+  }
+    
 
   calculateTotals() {
     this.totalMonthly = 0;
