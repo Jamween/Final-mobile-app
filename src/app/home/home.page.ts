@@ -3,6 +3,7 @@ import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Preferences } from '@capacitor/preferences';
+import { PushNotifications } from '@capacitor/push-notifications';
 
 
 @Component({
@@ -21,7 +22,9 @@ export class HomePage {
 
   ionViewWillEnter() {
     this.loadSubscriptions();
+    this.registerPushNotifications();
   }
+  
 
   async deleteSubscription(index: number) {
     this.subscriptions.splice(index, 1); // Remove from array
@@ -55,5 +58,16 @@ export class HomePage {
       }
     }
   }
+
+  registerPushNotifications() {
+    PushNotifications.requestPermissions().then(result => {
+      if (result.receive === 'granted') {
+        PushNotifications.register();
+      } else {
+        console.log('Push permission not granted');
+      }
+    });
+  }
+  
 }
 
