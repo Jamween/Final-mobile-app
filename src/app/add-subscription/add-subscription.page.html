@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Add Subscription</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <form (ngSubmit)="saveSubscription()">
+
+    <ion-item>
+      <ion-label position="floating">Subscription Name</ion-label>
+      <ion-input [(ngModel)]="subscription.name" name="name" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Amount (&euro;)</ion-label>
+      <ion-input type="number" [(ngModel)]="subscription.amount" name="amount" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Renewal Date</ion-label>
+      <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="subscription.date" name="date" required></ion-datetime>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Billing Cycle</ion-label>
+      <ion-select [(ngModel)]="subscription.billingCycle" name="billingCycle">
+        <ion-select-option value="monthly">Monthly</ion-select-option>
+        <ion-select-option value="yearly">Yearly</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Payment Method</ion-label>
+      <ion-input [(ngModel)]="subscription.paymentMethod" name="paymentMethod"></ion-input>
+    </ion-item>
+
+    <ion-button expand="full" type="submit" class="ion-margin-top">
+      Save Subscription
+    </ion-button>
+
+  </form>
+
+</ion-content>
